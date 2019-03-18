@@ -9,11 +9,13 @@
 export default {
   name: 'App'
 }
+///kkkk
 </script>
 
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font: size 10px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
