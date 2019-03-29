@@ -21,8 +21,9 @@
     },
   }
 </script>
-<style>
-.myCard{
+<style lang="scss" scoped>
+
+.card{
     height: 210px;
     margin-bottom: 16px;
 }

@@ -1,5 +1,5 @@
 <template>
-<el-tabs value="tab" type="border-card">
+<el-tabs value="tab">
   <el-tab-pane
     label="猜你喜欢"
     name="tab" 

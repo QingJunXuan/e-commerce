@@ -7,7 +7,7 @@
     <!-- 分类+畅销榜 -->
     <el-row style="margin-top: 20px;">
       <el-col :span="16" :offset="1">
-          <Class></Class>
+          <type></type>
       </el-col>
       <el-col :span="5" :offset="1">
         <collapse></collapse>
@@ -31,7 +31,7 @@
     <el-row style="margin-top: 20px;">
       <!-- 猜你喜欢 -->
       <el-col :span="22" :offset="1">
-        <for-user></for-user>
+        <el-card><for-user></for-user></el-card>
       </el-col>
     </el-row>
   </el-row>
@@ -39,7 +39,7 @@
 <script>
 import Slides from '../components/Slides.vue';
 import Collapse from '../components/Collapse.vue';
-import Class from '../components/Class.vue';
+import Type from '../components/Type.vue';
 import Sale from '../components/Sale.vue';
 import Recommend from '../components/Recommend.vue';
 import forUser from '../components/forUser.vue';
@@ -49,7 +49,7 @@ export default {
   components: {
     Slides,
     Collapse,
-    Class,
+    Type,
     Sale,
     Recommend,
     forUser,
