@@ -2,7 +2,7 @@
     <Slides></Slides>
 </template>
 <script>
-import Slides from './Slides.vue'
+import Slides from '../components/Slides.vue'
 
 export default {
     components:{

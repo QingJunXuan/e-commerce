@@ -1,4 +1,3 @@
-
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -9,7 +8,8 @@ import VueAxios from 'vue-axios'
 
 // axios.defaults.baseURL = '/api'
 Vue.use(ElementUI);
-Vue.use(VueAxios,axios);
+Vue.use(VueAxios);
+Vue.use(axios);
 Vue.config.productionTip = false
 
 new Vue({

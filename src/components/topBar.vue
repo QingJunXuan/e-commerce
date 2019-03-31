@@ -4,7 +4,7 @@
       <div class="app-header-inner">
         <el-col :span="4">
           <!-- 给logo图片添加路由,点击跳转到首页 -->
-          <router-link :to="{path: '/'}">
+          <router-link :to="{path: '/index'}">
             <img class="header-img" src="../assets/logo.png">
           </router-link>
         </el-col>
@@ -34,17 +34,22 @@
   </el-row>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      userName: '',
-      search:'',
-
+      userName: "",
+      search: ""
     };
   },
   methods: {
+    search() {},
     user() {},
-    log() {this.userName='xuan'},
+    log() {
+      this.$router.push({
+        path: "/login"
+      });
+    },
     myList() {},
     shoppingCart() {}
   }
@@ -55,7 +60,7 @@ export default {
 .app-header {
   width: 100%;
   height: 80px;
-  background:#ddd;
+  background: #ddd;
   margin-left: -1px;
   padding-right: 4px;
   border-bottom: 4px solid rgb(183, 183, 183);

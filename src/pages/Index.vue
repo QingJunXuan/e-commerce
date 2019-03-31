@@ -1,5 +1,5 @@
 <template>
-  <el-row>
+  <el-row style="margin-top:100px">
     <!-- 轮播图 -->
     <el-row>
       <slides></slides>
@@ -7,19 +7,19 @@
     <!-- 分类+畅销榜 -->
     <el-row style="margin-top: 20px;">
       <el-col :span="16" :offset="1">
-          <type></type>
+        <type></type>
       </el-col>
       <el-col :span="5" :offset="1">
-        <collapse></collapse>
+        <hot-books></hot-books>
       </el-col>
     </el-row>
     <!-- 打折商品+新书榜 -->
     <el-row style="margin-top: 20px;">
       <el-col :span="16" :offset="1">
-          <Sale></Sale>
+        <Sale></Sale>
       </el-col>
       <el-col :span="5" :offset="1">
-        <collapse></collapse>
+        <new-books></new-books>
       </el-col>
     </el-row>
     <el-row style="margin-top: 20px;">
@@ -28,38 +28,39 @@
         <recommend></recommend>
       </el-col>
     </el-row>
-    <el-row style="margin-top: 20px;">
+    <el-row style="margin-top: 40px;">
       <!-- 猜你喜欢 -->
       <el-col :span="22" :offset="1">
-        <el-card><for-user></for-user></el-card>
+        <el-card>
+          <for-user></for-user>
+        </el-card>
       </el-col>
     </el-row>
   </el-row>
 </template>
 <script>
-import Slides from '../components/Slides.vue';
-import Collapse from '../components/Collapse.vue';
-import Type from '../components/Type.vue';
-import Sale from '../components/Sale.vue';
-import Recommend from '../components/Recommend.vue';
-import forUser from '../components/forUser.vue';
+import Slides from "../components/Slides.vue";
+import hotBooks from "../components/index/hotBooks.vue";
+import newBooks from "../components/index/newBooks.vue";
+import Type from "../components/index/Type.vue";
+import Sale from "../components/index/Sale.vue";
+import Recommend from "../components/index/Recommend.vue";
+import forUser from "../components/index/forUser.vue";
 
 export default {
-  name: 'index',
+  name: "index",
   components: {
     Slides,
-    Collapse,
+    hotBooks,
+    newBooks,
     Type,
     Sale,
     Recommend,
-    forUser,
+    forUser
   }
 };
 </script>
 <style >
-/* .el-row{
-  
-} */
 </style>
 
 
