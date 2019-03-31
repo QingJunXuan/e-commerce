@@ -127,6 +127,12 @@ export default {
         .then(resp => {
           console.log(resp.data);
         });
+    },
+    preClick(){
+
+    },
+    nexClick(){
+      
     }
   },
   created() {
