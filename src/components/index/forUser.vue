@@ -6,11 +6,11 @@
           <el-card class="myCard_3" shadow="hover">
             <el-row>
               <el-col :span="12">
-                <img class="cardImg_3" :src="book.picture" @click="bookDetail">
+                <img class="cardImg_3" :src="book.picture" @click="bookDetail(book.name)">
               </el-col>
               <el-col :span="10" :offset="2">
                 <div style="margin-top:-10px">
-                  <p class="name_3" @click="bookDetail">{{book.name}}</p>
+                  <p class="name_3" @click="bookDetail(book.name)">{{book.name}}</p>
                   <p class="author_3">{{book.author}}</p>
                   <p class="price_3">{{"￥"+book.nowprice}}</p>
                   <p class="intro_3">{{book.introduction}}</p>
@@ -26,8 +26,6 @@
 
 
 <script>
-import axios from "axios";
-
 export default {
   data() {
     return {
@@ -85,7 +83,7 @@ export default {
   },
   methods: {
     test() {
-      axios
+      this.$axios
         .get("/api/getCommonRecommendBooks")
         .then(resp => {
           this.books = resp.data;
@@ -95,10 +93,17 @@ export default {
           console.log(err);
         });
     },
-    bookDetail() {}
+    bookDetail(name) {
+      this.$router.push({
+        path:'/bookDetail',
+        query:{
+          bookName:name
+        }
+      })
+    }
   },
   created() {
-    axios
+    this.$axios
       .get("/api/getCommonRecommendBooks")
       .then(resp => {
         this.books = resp.data;

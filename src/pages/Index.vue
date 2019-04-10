@@ -1,5 +1,5 @@
 <template>
-  <el-row style="margin-top:100px">
+  <el-row style="margin-top:35px">
     <!-- 轮播图 -->
     <el-row>
       <slides></slides>
@@ -47,7 +47,7 @@ import Sale from "../components/index/Sale.vue";
 import Recommend from "../components/index/Recommend.vue";
 import forUser from "../components/index/forUser.vue";
 
-export default {
+export default { 
   name: "index",
   components: {
     Slides,

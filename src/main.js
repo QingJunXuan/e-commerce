@@ -8,8 +8,8 @@ import VueAxios from 'vue-axios'
 
 // axios.defaults.baseURL = '/api'
 Vue.use(ElementUI);
-Vue.use(VueAxios);
-Vue.use(axios);
+//Vue.use(VueAxios)
+Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 
 new Vue({

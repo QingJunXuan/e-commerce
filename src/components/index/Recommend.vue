@@ -6,11 +6,11 @@
           <el-card class="myCard_3" shadow="hover">
             <el-row>
               <el-col :span="12">
-                <img class="cardImg_3" :src="book.picture" @click="bookDetail">
+                <img class="cardImg_3" :src="book.picture" @click="bookDetail(book.name)">
               </el-col>
               <el-col :span="10" :offset="2">
                 <div style="margin-top:-10px">
-                  <p class="name_3" @click="bookDetail">{{book.name}}</p>
+                  <p class="name_3" @click="bookDetail(book.name)">{{book.name}}</p>
                   <p class="author_3">{{book.author}}</p>
                   <p class="price_3">{{"￥"+book.nowprice}}</p>
                   <p class="intro_3">{{book.introduction}}</p>
@@ -22,12 +22,8 @@
       </el-row>
     </el-tab-pane>
   </el-tabs>
-</template>
-
-
+</template> 
 <script>
-import axios from "axios";
-
 export default {
   data() {
     return {
@@ -84,12 +80,19 @@ export default {
     };
   },
   methods: {
-    bookDetail() {}
+    bookDetail(name) {this.$router.push({
+        path:'/bookDetail',
+        query:{
+          bookName:name
+        }
+      })}
   },
   created() {
-    axios
+    this.$axios
       .get("/api/getCommonRecommendBooks")
       .then(resp => {
+        resp.data.pop();
+        resp.data.pop();
         this.books = resp.data;
         console.log(resp.data);
       })
@@ -102,12 +105,13 @@ export default {
 
 <style>
 .myCard_3 {
-  height: 200px;
-  margin-bottom: 16px;
+  height: 180px;
+  margin-bottom: 20px;
 }
 .cardImg_3 {
-  height: 160px;
+  height: 150px;
   width: 110px;
+  cursor: pointer;
 }
 .name_3 {
   text-align: left;
@@ -118,6 +122,8 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: -5px;
+  cursor: pointer;
 }
 p.name_3:hover {
   color: rgb(240, 232, 232);
@@ -134,7 +140,9 @@ p.name_3:hover {
 }
 .price_3 {
   text-align: left;
+  font-size: 14px;
   color: rgb(233, 43, 10);
+  margin-bottom: -5px;
 }
 .intro_3 {
   font-size: 10px;
@@ -148,5 +156,6 @@ p.name_3:hover {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  margin-bottom: -5px;
 }
 </style>

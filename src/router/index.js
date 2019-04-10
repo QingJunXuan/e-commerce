@@ -10,7 +10,7 @@ import home from '../pages/home.vue'
 import Register from '../pages/Register.vue'
 
 Vue.use(Router)
-Vue.use(axios)
+Vue.prototype.$axios = axios
 
 export default new Router({
   routes: [{
@@ -27,14 +27,17 @@ export default new Router({
       path: 'searchList',
       component: searchList
     }]
-  },{
+  }, {
     path: '/login',
     component: Login
   }, {
     path: '/home',
     component: home
-  },{
-    path:'/register',
-    component:Register
+  }, {
+    path: '/register',
+    component: Register
+  }, {
+    path: 'bookDetail',
+    component: Detail
   }]
 })

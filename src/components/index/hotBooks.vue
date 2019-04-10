@@ -8,12 +8,11 @@
         <el-collapse v-model="activeName" accordion>
           <el-collapse-item v-for="(book,index) in books" :key="index" :name="book.id">
             <template slot="title">
-              <i class="header-icon el-icon-info"></i>
-              {{book.name}}
+              {{index+1+'  '+book.name}}
             </template>
             <el-row>
               <el-col :span="9">
-                <img :src="book.picture" class="img" @click="bookDetail">
+                <img :src="book.picture" class="img" @click="bookDetail(book.name)">
               </el-col>
               <el-col :span="15">
                 <div>
@@ -31,7 +30,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     return {
@@ -41,11 +39,18 @@ export default {
     };
   },
   methods: {
-    bookDetail() {}
+    bookDetail(name) {
+      this.$router.push({
+        path:'/bookDetail',
+        query:{
+          bookName:name
+        }
+      })
+    }
   },
   created() {
     console.log(this.activeName);
-    axios
+    this.$axios
       .get("/api/getHotBooks")
       .then(resp => {
         this.books = resp.data.map(item => {
@@ -93,6 +98,7 @@ export default {
   padding-top: 10px;
   height: 110px;
   width: 80px;
+  cursor: pointer;
 }
 .price_2 {
   font-size: 12px;

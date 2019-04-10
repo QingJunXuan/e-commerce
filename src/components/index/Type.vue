@@ -1,5 +1,5 @@
 <template>
-  <el-tabs v-model="activeName" type="border-card" @tab-click="tabClick" style="margin-right:-40px">
+  <el-tabs v-model="activeName" type="border-card" @tab-click="tabClick" style="margin-right:-40px;height:505px">
     <el-tab-pane
       v-for="(item,index) in types"
       :key="index"
@@ -26,25 +26,33 @@
           </el-card>
         </el-col>
       </el-row>
-      <el-pagination layout="prev, pager, next" :total="50" style="text-align:center"></el-pagination>
+      <el-pagination
+        layout="prev, pager, next"
+        :page-count="totalPage"
+        :current-page="currentPage"
+        style="text-align:center"
+        @current-change="handleCurrentChange"
+      ></el-pagination>
     </el-tab-pane>
   </el-tabs>
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     return {
       activeName: "1",
+      currentType:'青春',
+      currentPage: 1,
+      totalPage:1,
       types: [
-        { id: "1", type: "青春" },
+        { id: "1", type: "小说" },
         { id: "2", type: "历史" },
         { id: "3", type: "散文" },
         { id: "4", type: "悬疑" },
-        { id: "5", type: "政治" },
-        { id: "6", type: "小说" },
-        { id: "7", type: "艺术" },
+        { id: "5", type: "诗歌" },
+        { id: "6", type: "青春" },
+        { id: "7", type: "奇幻" },
         { id: "8", type: "励志" }
       ],
       books: [
@@ -91,21 +99,41 @@ export default {
       ]
     };
   },
+  created() {
+    this.$axios
+      .get("/api/getBookByType", {
+        params: {
+          type: this.currentType,
+          page:1
+        }
+      })
+      .then(resp => {
+        this.totalPage = resp.data.pop();
+        this.books = resp.data;
+        console.log(resp.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
   methods: {
     tabClick() {
-      console.log(this.activeName);
+      //console.log(this.activeName);
       var x = parseInt(this.activeName);
-      var init = this.types[x - 1].type;
-      console.log(init);
-      axios
+      this.currentType = this.types[x - 1].type;
+      //console.log(init);
+      this.currentPage = 1;
+      this.$axios
         .get("/api/getBookByType", {
           params: {
-            type: init
+            type: this.currentType,
+            page: this.currentPage
           }
         })
         .then(resp => {
-          this.books = resp.data;
-          console.log(resp.data);
+        this.totalPage = resp.data.pop();
+        this.books = resp.data;
+        console.log(resp.data);
         })
         .catch(err => {
           console.log(err);
@@ -115,10 +143,10 @@ export default {
       this.$router.push({
         path: "/bookDetail",
         query: {
-          name: name
+          bookName: name
         }
       });
-      axios
+      /* this.$axios
         .get("/api/getBookByName", {
           params: {
             name: name
@@ -126,32 +154,30 @@ export default {
         })
         .then(resp => {
           console.log(resp.data);
-        });
+        }); */
     },
-    preClick(){
-
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      this.getBooksByPage();
     },
-    nexClick(){
-      
-    }
-  },
-  created() {
-    var x = parseInt(this.activeName);
-    var init = this.types[x - 1].type;
-    axios
-      .get("/api/getBookByType", {
-        params: {
-          type: init
-        }
-      })
-      .then(resp => {
+    getBooksByPage() {
+      this.$axios
+        .get("/api/getBookByType", {
+          params: {
+            type: this.currentType,
+            page: this.currentPage
+          }
+        })
+        .then(resp => {
+        resp.data.pop()
         this.books = resp.data;
         console.log(resp.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
 };
 </script>
 
@@ -164,10 +190,11 @@ export default {
   height: 140px;
   width: 100px;
   margin-left: -10px;
+  cursor: pointer;
 }
 .name {
   text-align: left;
-  font-size: 12px;
+  font-size: 13px;
   color: rgb(14, 13, 13);
   height: 20px;
   text-align: left;
@@ -176,6 +203,7 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: -5px;
+  cursor: pointer;
 }
 p.name:hover {
   color: brown;
@@ -189,10 +217,11 @@ p.name:hover {
   text-overflow: ellipsis;
   font-size: 12px;
   color: rgb(137, 137, 137);
-  margin-bottom: -5px;
+  /* color:cadetblue; */
 }
 .price {
   text-align: left;
+  font-size: 12px;
   color: rgb(233, 43, 10);
   margin-bottom: -5px;
 }
