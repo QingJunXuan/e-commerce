@@ -58,12 +58,12 @@
             </el-row>
             <el-row style="padding-top:20px;">
               <el-col :span="8">
-                <el-button class="addShopCart">
+                <el-button class="addShopCart" @click="addBook">
                   <i class="el-icon-sold-out" style="margin-left:-10px"></i> 加入购物车
                 </el-button>
               </el-col>
               <el-col :span="7">
-                <el-button class="buy">立即购买</el-button>
+                <el-button class="buy" @click="buy">立即购买</el-button>
               </el-col>
             </el-row>
           </div>
@@ -167,7 +167,15 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    }
+    },
+    addBook(){
+      //传后端user_id+book_id
+    },
+    buy(){
+      //传后端user_id+book_id
+
+      //跳转到cart页
+    },
   }
 };
 </script>
@@ -229,5 +237,3 @@ export default {
   border: 1px solid red;
 }
 </style>
-
-

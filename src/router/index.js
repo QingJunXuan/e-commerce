@@ -6,8 +6,10 @@ import Index from '../pages/Index.vue'
 import Detail from '../pages/Detail.vue'
 import searchList from '../pages/searchList.vue'
 import Login from '../pages/Login.vue'
-import home from '../pages/home.vue'
+import Personal from '../pages/Personal.vue'
 import Register from '../pages/Register.vue'
+import Cart from '../pages/Cart.vue'
+import Address from '../pages/Address.vue'
 
 Vue.use(Router)
 Vue.prototype.$axios = axios
@@ -31,13 +33,16 @@ export default new Router({
     path: '/login',
     component: Login
   }, {
-    path: '/home',
-    component: home
+    path: '/personal',
+    component: Personal
   }, {
     path: '/register',
     component: Register
   }, {
-    path: 'bookDetail',
-    component: Detail
-  }]
+    path: '/cart',
+    component: Cart
+    }, {
+      path: '/address',
+      component: Address
+    }]
 })

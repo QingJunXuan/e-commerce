@@ -203,7 +203,7 @@ export default {
     sendCodeButtonClick() {
       this.axios
         .get(
-          "http://192.168.43.249:54468/api/Users/VerifyRegister?Email=" +
+          "/api/Users/VerifyRegister?Email=" +
             this.email
         )
         .then(response => {

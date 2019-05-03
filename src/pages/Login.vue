@@ -1,49 +1,68 @@
 <template>
-  <!-- <div class="homepage-hero-module">
-    <div class="video-container"> -->
-      <el-row  class="back">
-        <el-col :span="13" :offset="1" class="backImg"><img src="../assets/images/image-1.jpg"/></el-col>
-        <el-col :span="9" :offset="1" style="  text-align:center;
-  position:relative;">
-          <el-card class="box-card LoginForm" style="width:350px;">
-            <el-row style="margin-top:30px;">
-              <img src="../assets/logo.png" alt="logo" height="60">
-            </el-row>
-            <el-row type="flex" justify="center">
-              <el-col :span="18">
-                <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="form">
-                  <el-form-item prop="email">
-                    <el-input v-model="ruleForm.email" placeholder="邮箱"></el-input>
-                  </el-form-item>
-                  <el-form-item label prop="password">
-                    <el-input type="password" v-model="ruleForm.password" placeholder="密码"></el-input>
-                  </el-form-item>
-                  <el-row type="flex" justify="end">
-                    <el-col :span="4">
-                      <el-button type="text" @click="toForgetPsw">忘记密码?</el-button>
-                    </el-col>
-                  </el-row>
-                  <el-row>
-                    <el-button
-                      type="primary"
-                      @click="handleLogin('ruleForm')"
-                      style="margin-top:20px;width:80%"
-                      plain
-                    >登陆</el-button>
-                  </el-row>
-                  <el-row type="flex" justify="center" align="middle" style="margin-top:20px">
-                    <el-col :span="7">
-                      <div style="height:30px;line-height:30px">没有账户?</div>
-                    </el-col>
-                    <el-col :span="3" :offset="0">
-                      <el-button type="text" @click="toRegister">注册</el-button>
-                    </el-col>
-                  </el-row>
-                </el-form>
-              </el-col>
-            </el-row>
-          </el-card>
-        </el-col>
+  <el-row class="back">
+    <el-col :span="16" :offset="2" class="backImg">
+      <img src="../assets/images/image-1.jpg"/>
+    </el-col>
+    <el-col :span="4" :offset="1" style="text-align:center;osition:relative;">
+      <el-card class="box-card">
+        <el-row style="margin-top:30px;">
+          <img src="../assets/logo.png" alt="logo" height="60" />
+        </el-row>
+        <el-row type="flex" justify="center">
+          <el-col :span="18">
+            <el-form
+              :model="ruleForm"
+              :rules="rules"
+              ref="ruleForm"
+              class="form"
+            >
+              <el-form-item prop="email">
+                <el-input
+                  v-model="ruleForm.email"
+                  placeholder="邮箱"
+                  style="width:240px"
+                ></el-input>
+              </el-form-item>
+              <el-form-item label prop="password">
+                <el-input
+                  type="password"
+                  v-model="ruleForm.password"
+                  placeholder="密码"
+                  style="width:240px"
+                  @keyup.enter.native="handleLogin()"
+                ></el-input>
+              </el-form-item>
+              <el-row type="flex" justify="end">
+                <el-col :span="4">
+                  <el-button type="text" @click="toForgetPsw">忘记密码?</el-button>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-button
+                  type="primary"
+                  @click="handleLogin()"
+                  style="margin-top:20px;width:80%"
+                  plain
+                  >登陆</el-button>
+              </el-row>
+              <el-row
+                type="flex"
+                justify="center"
+                align="middle"
+                style="margin-top:20px"
+              >
+                <el-col :span="7">
+                  <div style="height:30px;line-height:30px">没有账户?</div>
+                </el-col>
+                <el-col :span="3" :offset="0">
+                  <el-button type="text" @click="toRegister">注册</el-button>
+                </el-col>
+              </el-row>
+            </el-form>
+          </el-col>
+        </el-row>
+      </el-card>
+    </el-col>
   </el-row>
 </template>
 <script>
@@ -89,96 +108,86 @@ export default {
     };
   },
   methods: {
-    /*       canplay() {
-        this.vedioCanPlay = true
-      }, */
-    handleLogin(formName) {
-      console.log(this.ruleForm);
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.axios
-            .get(
-              "http://192.168.43.249:54468/api/Users/Login?Email=" +
-                this.ruleForm.email +
-                "&Password=" +
-                md5(this.ruleForm.password).substr(0, 20)
+    handleLogin() {
+      console.log(this.ruleForm, "login");
+      this.$refs.ruleForm.validate(valid => {
+        //let that = this;
+        if(valid){this.toHome()}
+        /* if (valid) {
+          //that.logining = true;
+
+          that.axios
+            .post(
+              "/api/auth",
+              {
+                username: this.ruleForm.email,
+                password: this.ruleForm.password
+              },
+              { emulateJSON: false }
             )
-            .then(response => {
-              if (response.data == "NotFound") {
-                this.$message.error("邮箱不存在！请先注册一个账户！");
-              } else if (response.data == "Error") {
-                this.$message.error("密码错误！");
-              } else {
-                this.$store.commit("addCurrentUserId", this.ruleForm.email);
-                this.$store.commit("addCurrentUserId_ID", response.data);
-                console.log(this.$store.state.currentUserId_ID);
-                this.$router.push("/main/user/" + this.ruleForm.email);
-                this.axios
-                  .get(
-                    "http://192.168.43.249:54468/api/Users/GetUserInfo?email=" +
-                      this.$store.state.currentUserId
-                  )
-                  .then(response => {
-                    this.$store.commit(
-                      "addCurrentUsername",
-                      response.data.Username
-                    );
-                    this.$store.commit(
-                      "addCurrentUserPassword",
-                      response.data.Password
-                    );
-                    this.$store.commit("addCurrentUserBio", response.data.Bio);
-                    this.$store.commit(
-                      "addCurrentUserPhoto",
-                      response.data.Photo
-                    );
-                    var exp = new Date();
-                    exp.setTime(exp.getTime() + 1000 * 60 * 60 * 24); //这里表示保存24小时
-                    this.document.cookie =
-                      "Username=" +
-                      response.data.Username +
-                      ";Password=" +
-                      response.data.Password +
-                      ";Bio=" +
-                      response.data.Bio +
-                      ";Photo=" +
-                      response.data.Photo +
-                      ";expires=" +
-                      exp.toGMTString();
-                    console.log(this.$store.state);
-                  });
+            .then(
+              response => {
+                console.log(response.data);
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("username", this.ruleForm.email);
+                //that.logining = false;
+                that.$notify({
+                  title: "登录成功",
+                  message: "页面即将跳转",
+                  type: "success",
+                  duration: 2000
+                });
+                //this.loginTableVisible = false;
+                setTimeout(function() {
+                  //location.reload();
+                  this.toHome()
+                  //TODO: 根据身份跳转
+                }, 2000);
+              },
+              response => {
+                console.log("登录失败：", response);
+                //that.logining = false;
+                that.$notify.error({
+                  title: "登录失败",
+                  message: "用户名密码不匹配或网络错误",
+                  duration: 2000
+                });
               }
-            })
-            .catch(error => {
-              console.log(error);
-            });
-        } else {
-          return false;
-        }
+            );
+        } */
       });
     },
-    toForgetPsw: function() {
+    toHome() {
+      this.$router.push({
+        path: "/",
+        query: {
+          login:true,
+          userName:this.ruleForm.email}
+      });
+    },
+    toForgetPsw() {
       this.$router.push("/forgetpsw");
     },
-    toRegister: function() {
+    toRegister() {
       this.$router.push("/register");
     }
-  },
+  }
 };
 </script>
 
 <style scoped>
-html,body{
-  width:100%;
+html,
+body {
+  width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
 }
-.backImg{
+.backImg {
   position: relative;
   top: 25%;
 }
-.back{
+.back {
   height: 590px;
 }
 .form {
@@ -194,13 +203,11 @@ html,body{
   clear: both;
 }
 .box-card {
-  width: 500px;
-  margin: -50px auto;
+  width: 350px;
   font-size: 14px;
-  background: rgb(255, 255, 255);
+  background: rgb(250, 245, 219);
   position: absolute;
-  top: 350px;
-  left: 50%;
+  top: 300px;
   transform: translate(-50%, -50%);
   border: 0;
 }

@@ -1,5 +1,5 @@
 <template>
-  <el-tabs value="tab" type="card" @tab-click="test">
+  <el-tabs value="tab" type="border-card" @tab-click="test">
     <el-tab-pane label="猜你喜欢" name="tab">
       <el-row :gutter="10">
         <el-col :span="6" v-for="(book,bIndex) in books" :key="bIndex">
@@ -106,6 +106,8 @@ export default {
     this.$axios
       .get("/api/getCommonRecommendBooks")
       .then(resp => {
+        resp.data.pop();
+        resp.data.pop();
         this.books = resp.data;
         console.log(resp.data);
       })

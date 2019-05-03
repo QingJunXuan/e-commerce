@@ -3,7 +3,7 @@
     <el-row>
       <el-row>
         <span class="title">{{title}}</span>
-        <button @click="test">test</button>
+        <!-- <button @click="test">test</button> -->
       </el-row>
       <el-row style="padding-top:10px">
         <el-collapse v-model="activeName" accordion>

@@ -31,9 +31,7 @@
     <el-row style="margin-top: 40px;">
       <!-- 猜你喜欢 -->
       <el-col :span="22" :offset="1">
-        <el-card>
-          <for-user></for-user>
-        </el-card>
+        <for-user></for-user>
       </el-col>
     </el-row>
   </el-row>
@@ -47,7 +45,7 @@ import Sale from "../components/index/Sale.vue";
 import Recommend from "../components/index/Recommend.vue";
 import forUser from "../components/index/forUser.vue";
 
-export default { 
+export default {
   name: "index",
   components: {
     Slides,
@@ -62,5 +60,3 @@ export default {
 </script>
 <style >
 </style>
-
-

@@ -4,29 +4,36 @@
       <div class="app-header-inner">
         <el-col :span="6" style="padding-left:50px">
           <!-- 给logo图片添加路由,点击跳转到首页 -->
-          <router-link :to="{path: '/'}">
-            <img class="header-img" src="../assets/logo.png">
+          <router-link :to="{ path: '/' }">
+            <img class="header-img" src="../assets/logo.png" />
           </router-link>
         </el-col>
-        <el-col :span="14" style="padding-left:10px">
+        <el-col :span="13" style="padding-left:10px">
           <!--搜索框-->
           <div style="margin-top: 20px;">
-            <el-input placeholder="请输入内容" v-model="search" class="input-with-selct">
+            <el-input
+              placeholder="请输入内容"
+              v-model="search"
+              class="input-with-selct"
+            >
               <el-select v-model="select" slot="prepend">
                 <el-option label="书名" value="1"></el-option>
                 <el-option label="类型" value="2"></el-option>
                 <el-option label="作者" value="3"></el-option>
               </el-select>
-              <el-button slot="append" icon="el-icon-search" @click="searchf"></el-button>
+              <el-button
+                slot="append"
+                icon="el-icon-search"
+                @click="searchf"
+              ></el-button>
             </el-input>
           </div>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="5">
           <ul>
-            <li v-show="userName!==''" @click="user">{{userName}}</li>
-            <li v-show="userName ==''" @click="userName='xuan'">登录/注册</li>
-            <li v-show="userName!==''" @click="myList">我的订单</li>
-            <li v-show="userName!==''" @click="shoppingCart">购物车</li>
+            <li v-show="login" @click="toUser">{{ userName }}</li>&nbsp;
+            <li v-show="login == false" @click="toLogin">登录/注册</li>
+            <li v-show="login" @click="toCart">购物车</li>
           </ul>
         </el-col>
       </div>
@@ -37,10 +44,19 @@
 export default {
   data() {
     return {
+      login: false,
       select: "1",
       userName: "",
       search: ""
     };
+  },
+  created() {
+    if (this.$route.query.login) {
+      const param1 = this.$route.query.login;
+      this.login = param1;
+      const param2 = this.$route.query.userName;
+      this.userName=param2
+    }
   },
   methods: {
     searchf() {
@@ -53,14 +69,13 @@ export default {
       });
       //location.reload();
     },
-    user() {},
-    log() {
+    toUser() {},
+    toLogin() {
       this.$router.push({
         path: "/login"
       });
     },
-    myList() {},
-    shoppingCart() {}
+    toCart() {}
   }
 };
 </script>
@@ -72,7 +87,7 @@ export default {
   background: #ddd;
   margin-left: 0px;
   padding-right: 0px;
-  margin-top:-8px;
+  margin-top: -8px;
   border-bottom: 4px solid rgb(183, 183, 183);
   /*固定上边栏*/
 }
