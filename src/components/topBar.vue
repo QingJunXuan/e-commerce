@@ -51,11 +51,19 @@ export default {
     };
   },
   created() {
+    if (localStorage.getItem("username")) {
+      this.login = true;
+      this.userName=localStorage.getItem('username')
+    }
+  },
+  watch:{
+    $route(to,from){
     if (this.$route.query.login) {
       const param1 = this.$route.query.login;
       this.login = param1;
-      const param2 = this.$route.query.userName;
+      const param2 = this.$route.query.name;
       this.userName=param2
+    }
     }
   },
   methods: {
@@ -75,7 +83,11 @@ export default {
         path: "/login"
       });
     },
-    toCart() {}
+    toCart() {
+      this.$router.push({
+        path: "/cart"
+      });
+    }
   }
 };
 </script>

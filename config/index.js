@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://101.132.194.45:8080',
+        target: 'http://101.132.194.45:8081',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/store-0.0.1-SNAPSHOT'
@@ -34,12 +34,12 @@ module.exports = {
      */
 
     // https://webpack.js.org/configuration/devtool/#development
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
 
     // If you have problems debugging vue-files in devtools,
     // set this to false - it *may* help
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
-    cacheBusting: true,
+    cacheBusting: false,
 
     cssSourceMap: true
   },

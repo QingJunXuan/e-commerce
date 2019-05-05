@@ -147,11 +147,15 @@ export default {
     };
   },
   created() {
-    this.name = this.$route.query.bookName;
     this.getDetail();
   },
+  watch:{
+    $router(to,form){
+      this.getDetail()
+    }},
   methods: {
     getDetail() {
+      this.name = this.$route.query.bookName;
       this.$axios
         .get("/api/getBookByName", {
           params: {
@@ -162,6 +166,7 @@ export default {
         .then(resp => {
           this.totalPage = resp.data.pop();
           this.book = resp.data[0];
+					console.log("TCL: getDetail -> this.book", this.book)
           console.log(this.book.catelog);
         })
         .catch(err => {
@@ -170,11 +175,35 @@ export default {
     },
     addBook(){
       //传后端user_id+book_id
+      this.$axios
+        .post("/api/addBookToCart", {
+          userid:localStorage.getItem('userid'),
+          bookid:this.book.id,
+          num:1
+        })
+        .then(resp => {
+					console.log("TCL: addBook -> resp", resp)
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     buy(){
       //传后端user_id+book_id
-
+      this.$axios
+        .post("/api/addBookToCart", {
+          userid:localStorage.getItem('userid'),
+          bookid:this.book.id,
+          num:1
+        })
+        .then(resp => {
+					console.log("TCL: addBook -> resp", resp)
+        })
+        .catch(err => {
+          console.log(err);
+        });
       //跳转到cart页
+      this.$router.push('/cart')
     },
   }
 };

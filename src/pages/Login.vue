@@ -16,10 +16,17 @@
               ref="ruleForm"
               class="form"
             >
-              <el-form-item prop="email">
+              <!-- <el-form-item prop="email">
                 <el-input
                   v-model="ruleForm.email"
                   placeholder="邮箱"
+                  style="width:240px"
+                ></el-input>
+              </el-form-item> -->
+              <el-form-item prop="name">
+                <el-input
+                  v-model="ruleForm.name"
+                  placeholder="用户名"
                   style="width:240px"
                 ></el-input>
               </el-form-item>
@@ -74,12 +81,19 @@ export default {
   data() {
     return {
       ruleForm: {
-        email: "",
+        name: "",
         password: ""
       },
       //vedioCanPlay: false,
       fixStyle: "",
       rules: {
+        name:[
+          {
+            required: true,
+            message: "请输入用户名",
+            trigger: "blur"
+          },
+        ],
         email: [
           {
             required: true,
@@ -98,9 +112,9 @@ export default {
             trigger: "blur"
           },
           {
-            min: 8,
+            min: 6,
             max: 20,
-            message: "密码长度为8~20",
+            message: "密码长度为6~20",
             trigger: "blur"
           }
         ]
@@ -111,16 +125,16 @@ export default {
     handleLogin() {
       console.log(this.ruleForm, "login");
       this.$refs.ruleForm.validate(valid => {
-        //let that = this;
-        if(valid){this.toHome()}
-        /* if (valid) {
+        let that = this;
+        //if(valid){this.toHome()}
+        if (valid) {
           //that.logining = true;
 
-          that.axios
+          that.$axios
             .post(
-              "/api/auth",
+              "/api/login",
               {
-                username: this.ruleForm.email,
+                name: this.ruleForm.name,
                 password: this.ruleForm.password
               },
               { emulateJSON: false }
@@ -129,19 +143,17 @@ export default {
               response => {
                 console.log(response.data);
                 localStorage.setItem("token", response.data.token);
-                localStorage.setItem("username", this.ruleForm.email);
+                localStorage.setItem("userid",response.data.userid)
+                localStorage.setItem("username", this.ruleForm.name);
                 //that.logining = false;
-                that.$notify({
+                 that.$notify({
                   title: "登录成功",
                   message: "页面即将跳转",
                   type: "success",
                   duration: 2000
                 });
-                //this.loginTableVisible = false;
                 setTimeout(function() {
-                  //location.reload();
-                  this.toHome()
-                  //TODO: 根据身份跳转
+                  that.toHome()
                 }, 2000);
               },
               response => {
@@ -154,7 +166,7 @@ export default {
                 });
               }
             );
-        } */
+        }
       });
     },
     toHome() {
@@ -162,7 +174,7 @@ export default {
         path: "/",
         query: {
           login:true,
-          userName:this.ruleForm.email}
+          name:this.ruleForm.name}
       });
     },
     toForgetPsw() {
