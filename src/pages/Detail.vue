@@ -11,13 +11,15 @@
     <el-row style="padding-top:60px;padding-bottom:60px">
       <el-col :span="20" :offset="2">
         <el-col :span="9">
-          <img class="detailImg" :src="book.picture">
+          <img style="height: 360px;width: 260px;" :src="book.picture">
         </el-col>
         <el-col :span="13" style="text-align:left;margin-top:-15px">
           <div>
-            <p class="name">{{book.name}}</p>
-            <p class="intro">{{book.subtitle}}</p>
-            <hr style="width:625px;background-color:#535351ec;">
+            <p style="font-size: 25px;color: rgb(53, 52, 52);font-weight: bold;">{{book.name}}&nbsp;
+              <i :class="{'el-icon-star-off':isOff,'el-icon-star-on':isOn}" @click="collect"></i>
+            </p>
+            <p style="margin-top: -15px;font-size: 16px;color: #646462ec;text-align: left;">{{book.subtitle}}</p>
+            <hr style="width:800px;background-color:#535351ec;margin-left:-20px">
             <el-row style="font-size:13px">
               <el-col :span="8">
                 作者：
@@ -38,7 +40,7 @@
                 ￥
                 <span style="font-size:30px">{{+book.nowprice}}</span>
               </span>
-              <span class="preprice">{{"￥"+book.preprice}}</span>
+              <span style="font-size: 15px;color: #4e5c99ec;text-decoration: line-through;padding-left: 10px;">{{"￥"+book.preprice}}</span>
             </div>
             <el-row style="font-size:15px;">
               <el-col :span="6">
@@ -143,15 +145,18 @@ export default {
     return {
       name: "",
       totalPage: 1,
-      book: {}
+      book: {},
+      isOff:true,
+      isOn:false,
     };
   },
   created() {
     this.getDetail();
   },
   watch:{
-    $router(to,form){
-      this.getDetail()
+    $route(to,form){
+      console.log("路由变化",to)
+      if(to.path=="/bookDetail")  this.getDetail()
     }},
   methods: {
     getDetail() {
@@ -205,39 +210,19 @@ export default {
       //跳转到cart页
       this.$router.push('/cart')
     },
+    collect(){
+      if(this.isOff==true){
+        this.isOff=false
+        this.isOn=true
+      }else{
+        this.isOff=true
+        this.isOn=false
+      }
+    },
   }
 };
 </script>
-<style>
-.detailImg {
-  height: 360px;
-  width: 260px;
-}
-.name {
-  font-size: 25px;
-  color: rgb(53, 52, 52);
-  font-weight: bold;
-}
-.preprice {
-  font-size: 15px;
-  color: #4e5c99ec;
-  text-decoration: line-through;
-  padding-left: 10px;
-}
-.intro {
-  margin-top: -15px;
-  font-size: 16px;
-  color: #646462ec;
-  text-align: left;
-  height: 20px;
-  width: 550px;
-  text-overflow: -o-ellipsis-lastline;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
+<style scope>
 .addShopCart {
   width: 150px;
   height: 40px;
@@ -249,7 +234,6 @@ export default {
 .addShopCart:hover {
   background-color: rgb(252, 53, 53);
   color: #fff;
-  
 }
 .buy {
   width: 130px;
@@ -264,5 +248,8 @@ export default {
   background-color: rgb(255, 218, 218);
   color: rgb(248, 91, 91);
   border: 1px solid red;
+}
+.el-icon-star-on{
+  color: gold
 }
 </style>

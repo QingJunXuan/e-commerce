@@ -55,7 +55,7 @@ export default {
     Sale,
     Recommend,
     forUser
-  }
+  },
 };
 </script>
 <style >
