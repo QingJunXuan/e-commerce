@@ -25,10 +25,10 @@ export default {
   name: "mainPage",
   components: {
     topBar
-  },
+  }
 };
 </script>
-<style >
+<style scoped>
 .app-content {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

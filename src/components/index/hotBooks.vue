@@ -66,7 +66,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .box-card {
   /* background-color: #e7cca4; */
   /* margin-top:20px; */

@@ -103,7 +103,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .myCard_3 {
   height: 180px;
   margin-bottom: 20px;
@@ -148,7 +148,7 @@ p.name_3:hover {
   font-size: 10px;
   color: #535351ec;
   text-align: left;
-  height: 40px;
+  height: 45px;
   width: 100px;
   text-overflow: -o-ellipsis-lastline;
   overflow: hidden;

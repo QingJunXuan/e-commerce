@@ -14,7 +14,7 @@
               <el-col :span="12">
                 <img class="cardImg" :src="book.picture" @click="bookDetail(book.name)">
               </el-col>
-              <el-col :span="8" :offset="3">
+              <el-col :span="9" :offset="2">
                 <div>
                   <p class="name" @click="bookDetail(book.name)">{{book.name}}</p>
                   <p class="author">{{book.author}}</p>
@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       activeName: "1",
-      currentType:'青春',
+      currentType:'小说',
       currentPage: 1,
       totalPage:1,
       types: [
@@ -146,15 +146,6 @@ export default {
           bookName: name
         }
       });
-      /* this.$axios
-        .get("/api/getBookByName", {
-          params: {
-            name: name
-          }
-        })
-        .then(resp => {
-          console.log(resp.data);
-        }); */
     },
     handleCurrentChange(val) {
       this.currentPage = val;
@@ -181,7 +172,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .myCard {
   height: 180px;
   margin-bottom: 20px;
@@ -229,8 +220,8 @@ p.name:hover {
   font-size: 10px;
   color: #535351ec;
   text-align: left;
-  height: 40px;
-  width: 70px;
+  height: 45px;
+  width: 80px;
   text-overflow: -o-ellipsis-lastline;
   overflow: hidden;
   text-overflow: ellipsis;

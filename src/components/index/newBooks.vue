@@ -76,3 +76,64 @@ export default {
   }
 };
 </script>
+<style scoped>
+.box-card {
+  /* background-color: #e7cca4; */
+  /* margin-top:20px; */
+  margin-bottom: 20px;
+  height: 505px;
+}
+.el-collapse-item .el-collapse-item__header {
+  /* color: rgb(150, 139, 133); */
+  font-size: 14px;
+  height: 30px;
+  padding-left: 0px;
+  /* background-color: #ddd2bdec; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgb(137, 139, 141);
+}
+.el-collapse-item .el-collapse-item__wrap {
+  height: 140px;
+}
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+  color: rgb(241, 34, 7);
+  margin-top: 5px;
+}
+.img {
+  padding-top: 10px;
+  height: 110px;
+  width: 80px;
+  cursor: pointer;
+}
+.price_2 {
+  font-size: 12px;
+  font-family: "Courier New", Courier, monospace;
+  color: rgb(233, 43, 10);
+  margin-bottom: -5px;
+}
+.author_2 {
+  font-size: 12px;
+  font-family: "Courier New", Courier, monospace;
+  color: rgb(146, 146, 146);
+  margin-bottom: -5px;
+}
+.intro_2 {
+  font-size: 11px;
+  color: #535351ec;
+  height: 55px;
+  text-align: center;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin-bottom: -5px;
+  padding-left: 5px;
+}
+</style>

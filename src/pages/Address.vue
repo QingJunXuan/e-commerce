@@ -12,8 +12,8 @@
 
       <!-- address list -->
       <div class="checkout-title">
-        <span v-if="isAddress == true">配送地址</span
-        ><span v-else-if="isPaying == true">支付</span>
+        <span v-if="isAddress == true">配送地址</span>
+        <span v-else-if="isPaying == true">支付</span>
       </div>
       <div class="addr-list-wrap" v-show="isAddress == true">
         <div class="addr-list">
@@ -108,19 +108,25 @@
               @click="shippingMethod = 2"
             >
               <div class="name">高级配送</div>
-              <div class="price">180</div>
+              <div class="price">10</div>
             </li>
           </ul>
         </div>
       </div>
 
       <div class="next-btn-wrap" v-show="isAddress">
+        <a @click="toCart" class="btn" style="margin-right:40px">返 回</a>
         <a @click="toPaying" class="btn btn--red">下一步</a>
       </div>
-      <div class="next-btn-wrap" v-show="isPaying">
-        <a @click="addOrder" class="btn btn--red">支付成功</a>
+      <div class="next-btn-wrap" v-show="isPaying" style="margin-top:100px">
+        <a @click="toAddress" class="btn" style="margin-right:40px">返 回</a>
+        <a @click="addOrder" class="btn btn--red">支 付</a>
       </div>
-      
+      <div style="text-align:center;padding-top:120px;font-size:17px;letter-spacing:3px" v-show="isPaid">
+        <i class="el-icon-loading"></i>
+        <p>支付成功，页面即将跳转</p>
+      </div>
+
         <el-dialog
           title="收货地址"
           :visible.sync="newFlag"
@@ -308,6 +314,7 @@ export default {
       shippingMethod: 1,
       isAddress: true,
       isPaying: false,
+      isPaid:false,
       newFlag: false,
       delFlag:false,
       editFlag:false,
@@ -460,21 +467,34 @@ export default {
         }
       });
     },
+    toCart(){
+      this.$router.push('/cart')
+    },
     toPaying() {
       //进度条变化
       this.process = "paying";
       this.isAddress = false;
       this.isPaying = true;
+      this.isPaid=false;
+    },
+    toAddress(){
+      this.process="address";
+      this.isAddress=true;
+      this.isPaying=false;
+      this.isPaid=false;
     },
     addOrder(){//下单
       //this.carts.push(localStorage.getItem('selectedList'))
 			//console.log("TCL: addOrder -> carts", this.carts)
       console.log("TCL: addOrder -> store.state.selectedList", store.state.selectedList)
-     /*  this.$axios
+      this.process="paid"
+      this.isPaying=false
+      this.isPaid=true
+       this.$axios
         .post("/api/generateOrder",{
             userid: localStorage.getItem('userid'),
             addressid:this.currentIndex,
-            carts:[181],
+            books:store.state.selectedList,
             price:localStorage.getItem('totalMoney')
         })
         .then(resp => {
@@ -483,20 +503,11 @@ export default {
         })
         .catch(err => {
           console.log(err);
-        });  */
+        });
      }
   }
 };
 </script>
-<style>
-@import "../css/base.css";
-</style>
-<style>
-@import "../css/modal.css";
-</style>
-<style>
-@import "../css/checkout.css";
-</style>
-<style>
-</style>
-
+<style scoped>@import "../css/base.css";</style>
+<style scoped>@import "../css/modal.css";</style>
+<style scoped>@import "../css/checkout.css";</style>

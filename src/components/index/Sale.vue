@@ -8,10 +8,10 @@
               <el-col :span="12">
                 <img class="cardImg" :src="book.picture" @click="bookDetail(book.name)">
               </el-col>
-              <el-col :span="8" :offset="3">
+              <el-col :span="9" :offset="2">
                 <p class="name" @click="bookDetail(book.name)">{{book.name}}</p>
                 <p class="author">{{book.author}}</p>
-                <p class="price">{{"￥"+book.nowprice}}</p>
+                <p class="price">{{"￥"+book.nowprice}}<span style="font-size: 8px;color: #4e5c99ec;text-decoration: line-through;padding-left: 10px;">{{"￥"+book.preprice}}</span></p>
                 <p class="intro">{{book.introduction}}</p>
               </el-col>
             </el-row>
@@ -137,5 +137,62 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
+.myCard {
+  height: 180px;
+  margin-bottom: 20px;
+}
+.cardImg {
+  height: 140px;
+  width: 100px;
+  margin-left: -10px;
+  cursor: pointer;
+}
+.name {
+  text-align: left;
+  font-size: 13px;
+  color: rgb(14, 13, 13);
+  height: 20px;
+  text-align: left;
+  width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: -5px;
+  cursor: pointer;
+}
+p.name:hover {
+  color: brown;
+  text-decoration: underline;
+}
+.author {
+  text-align: left;
+  width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  color: rgb(137, 137, 137);
+  /* color:cadetblue; */
+}
+.price {
+  text-align: left;
+  font-size: 12px;
+  color: rgb(233, 43, 10);
+  margin-bottom: -5px;
+}
+.intro {
+  font-size: 10px;
+  color: #535351ec;
+  text-align: left;
+  height: 45px;
+  width: 80px;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin-bottom: -5px;
+}
 </style>

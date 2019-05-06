@@ -117,3 +117,59 @@ export default {
   }
 };
 </script>
+<style scoped>
+.myCard_3 {
+  height: 180px;
+  margin-bottom: 20px;
+}
+.cardImg_3 {
+  height: 150px;
+  width: 110px;
+  cursor: pointer;
+}
+.name_3 {
+  text-align: left;
+  color: rgb(14, 13, 13);
+  height: 20px;
+  text-align: left;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: -5px;
+  cursor: pointer;
+}
+p.name_3:hover {
+  color: rgb(240, 232, 232);
+  text-decoration: underline;
+}
+.author_3 {
+  text-align: left;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  color: rgb(137, 139, 141);
+}
+.price_3 {
+  text-align: left;
+  font-size: 14px;
+  color: rgb(233, 43, 10);
+  margin-bottom: -5px;
+}
+.intro_3 {
+  font-size: 10px;
+  color: #535351ec;
+  text-align: left;
+  height: 45px;
+  width: 100px;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin-bottom: -5px;
+}
+</style>

@@ -49,7 +49,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="18" :offset="6" style="padding-top:15px">
+      <el-col :span="18" :offset="3" style="padding-top:15px">
         <el-pagination
           v-show="totalPage>1"
           layout="prev, pager, next,jumper"
@@ -129,12 +129,13 @@ export default {
     };
   },
   created() {
-    //this.name="测试";
-    this.type = this.$route.query.select;
-    this.name = this.$route.query.searchName;
-    console.log(this.name);
     this.getBooksByPage();
   },
+  watch:{
+    $route(to,from){
+      console.log("路由变化",to)
+      if(to.path=="/searchList")  this.getBooksByPage()
+    }},
   methods: {
     bookDetail(val) {
       this.$router.push({
@@ -148,7 +149,9 @@ export default {
       this.currentPage = val;
       this.getBooksByPage();
     },
-    getBooksByPage() {
+    getBooksByPage() { 
+    this.type = this.$route.query.select;
+    this.name = this.$route.query.searchName;
       if (this.type == "1") {
         this.$axios
           .get("/api/getBookByName", {
@@ -188,7 +191,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .headCard {
   height: 50px;
   width: 100%;
@@ -236,7 +239,7 @@ export default {
   color: #535351ec;
   text-align: left;
   height: 70px;
-  width: 260px;
+  width: 380px;
   text-overflow: -o-ellipsis-lastline;
   overflow: hidden;
   text-overflow: ellipsis;

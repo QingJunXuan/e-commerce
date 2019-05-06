@@ -27,13 +27,13 @@
                         href="javascript:void 0"
                         class="item-check-btn"
                         :class="{ check: item.checked }"
-                        @click="selectedProduct(item)"
+                        @click="selectedBook(item)"
                       >
                         <i class="icon iconfont icon-xuanzhong"></i>
                       </a>
                     </div>
                     <div class="cart-item-pic">
-                      <img :src="item.book.picture" alt="book" />
+                      <img :src="item.book.picture" alt="book" @click="getBookDetail(item.book.name)" />
                     </div>
                     <div class="cart-item-title">
                       <div class="item-name">{{ item.book.name }}</div>
@@ -194,8 +194,16 @@ export default {
       return "￥" + value.toFixed(2) + "(元)";
     }
   },
+  /* watch:{
+    $route(to,from){
+      const params = this.$route.query.bookid 
+      //this.buyInit(params)
+      
+    }
+  }, */
   methods: {
     setCart() {//获取booklist
+        const params = this.$route.query.bookid 
       this.$axios
         .get("/api/getCartInfo", {
           params: {
@@ -205,10 +213,22 @@ export default {
         .then(resp => {
           console.log("TCL: setCart -> resp", resp)
           this.bookList=resp.data
+          if(params){
+            var item=this.bookList.filter(book=>book.book.id==params)
+            this.selectedBook(item[0])
+          }
         })
         .catch(err => {
           console.log(err);
         });
+    },
+    getBookDetail(val){
+       this.$router.push({
+        path:'/bookDetail',
+        query:{
+          bookName:val
+        }
+      })
     },
     changeMoney(item, way) {//某种商品-修改价格
       if (way > 0) {
@@ -249,7 +269,7 @@ export default {
       }
       this.clacTotalPrice();
     },
-    selectedProduct(item) {//选定商品
+    selectedBook(item) {//选定商品
       if (typeof item.checked == "undefined") {
         // Vue.set(item,"checked",true);
         this.$set(item, "checked", true);
@@ -320,16 +340,10 @@ export default {
   }
 };
 </script>
-<style>
-@import "../css/base.css";
-</style>
-<style>
-@import "../css/modal.css";
-</style>
-<style>
-@import "../css/checkout.css";
-</style>
-<style>
+<style scoped>@import "../css/base.css";</style>
+<style scoped>@import "../css/modal.css";</style>
+<style scoped>@import "../css/checkout.css";</style>
+<style scoped>
 input[type="text"] {
   padding: 0.5em 20px;
   border: 1px solid #bbb;

@@ -144,7 +144,7 @@ export default {
                 console.log(response.data);
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("userid",response.data.userid)
-                localStorage.setItem("username", this.ruleForm.name);
+                localStorage.setItem("name", this.ruleForm.name);
                 //that.logining = false;
                  that.$notify({
                   title: "登录成功",

@@ -28,7 +28,7 @@ export default new Router({
     }, {
       path: 'searchList',
       component: searchList
-    }]
+      }]
   }, {
     path: '/login',
     component: Login
@@ -38,9 +38,9 @@ export default new Router({
   }, {
     path: '/register',
     component: Register
-  }, {
-    path: '/cart',
-    component: Cart
+    }, {
+      path: '/cart',
+      component: Cart
     }, {
       path: '/address',
       component: Address

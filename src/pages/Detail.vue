@@ -154,9 +154,8 @@ export default {
     this.getDetail();
   },
   watch:{
-    $route(to,form){
-      console.log("路由变化",to)
-      if(to.path=="/bookDetail")  this.getDetail()
+    $route(to,from){
+      if(to.path=="/bookDetail") this.getDetail();
     }},
   methods: {
     getDetail() {
@@ -171,8 +170,6 @@ export default {
         .then(resp => {
           this.totalPage = resp.data.pop();
           this.book = resp.data[0];
-					console.log("TCL: getDetail -> this.book", this.book)
-          console.log(this.book.catelog);
         })
         .catch(err => {
           console.log(err);
@@ -180,6 +177,7 @@ export default {
     },
     addBook(){
       //传后端user_id+book_id
+      if(localStorage.getItem("name")){
       this.$axios
         .post("/api/addBookToCart", {
           userid:localStorage.getItem('userid'),
@@ -192,9 +190,13 @@ export default {
         .catch(err => {
           console.log(err);
         });
+      }else{
+        this.$router.push('/login')
+      }
     },
     buy(){
       //传后端user_id+book_id
+      if(localStorage.getItem("name")){
       this.$axios
         .post("/api/addBookToCart", {
           userid:localStorage.getItem('userid'),
@@ -202,21 +204,30 @@ export default {
           num:1
         })
         .then(resp => {
-					console.log("TCL: addBook -> resp", resp)
+          console.log("TCL: buy -> resp", resp)
+          this.$router.push({
+            path:'/cart',
+            query:{bookid:this.book.id}
+          })
         })
         .catch(err => {
           console.log(err);
         });
-      //跳转到cart页
-      this.$router.push('/cart')
+      }else{
+        this.$router.push('/login')
+      }
     },
     collect(){
-      if(this.isOff==true){
-        this.isOff=false
-        this.isOn=true
+      if(localStorage.getItem("name")){
+        if(this.isOff==true){
+          this.isOff=false
+          this.isOn=true
+        }else{
+          this.isOff=true
+          this.isOn=false
+        }
       }else{
-        this.isOff=true
-        this.isOn=false
+        this.$router.push('/login')
       }
     },
   }
