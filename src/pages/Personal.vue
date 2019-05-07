@@ -132,7 +132,7 @@
                         </el-row>
                     </el-tab-pane> -->
           <el-tab-pane label="我的地址" name="fourth">
-            我的地址
+            我的地址test
           </el-tab-pane>
         </el-tabs>
       </el-col>
