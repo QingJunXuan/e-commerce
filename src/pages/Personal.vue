@@ -214,8 +214,6 @@ export default {
 </script>
 
 <style>
-.personal_info {
-}
 .image {
   height: 120px;
   width: 100px;
