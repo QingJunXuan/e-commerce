@@ -25,7 +25,7 @@ export default {
   name: "mainPage",
   components: {
     topBar
-  }
+  },
 };
 </script>
 <style scoped>
