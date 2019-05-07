@@ -100,37 +100,6 @@
               </el-card>
             </el-row>
           </el-tab-pane>
-          <!--  <el-tab-pane label="购物车" name="third">
-                        <el-row v-for="(o,i) in 5" :key=i>
-                        <el-button>
-                            <el-container>
-                                <el-aside width="150px;">
-                                    <el-row>
-                                        <img class="image" src="../assets/logo.png" prop="image" style="margin-left:20px;"/>
-                                    </el-row>
-                                </el-aside>
-                                <el-main>
-                                    <el-row :gutter="20">
-                                        <el-col :span="4" :offset="1" >书名：ECHO{{i.bookName}}</el-col>
-                                        <el-col :span="4" ><div class="">日期：2019.5.6{{i.date}}</div></el-col>
-                                    
-                                    </el-row>
-                                    <el-row :gutter="20">
-                                        <el-col :span="4" :offset="1"><div class="">作者：XXX{{i.author}}</div></el-col>
-                                        <el-col :span="4"><div class="">价格: 50rmb{{i.price}}</div></el-col>
-                                    </el-row>
-                                    <el-row :gutter="20">
-                                        
-                                        <el-button type="primary" icon="el-icon-goods" class="buy" @click="buy_info()">购买</el-button>
-                                        <el-button type="primary" icon="el-icon-error" class="delete" @click="buy_info()">删除</el-button>
-                                        
-                                    </el-row>
-                                    
-                                </el-main>
-                            </el-container>
-                        </el-button>
-                        </el-row>
-                    </el-tab-pane> -->
           <el-tab-pane label="我的地址" name="fourth">
             我的地址test
           </el-tab-pane>
